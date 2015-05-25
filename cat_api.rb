@@ -3,11 +3,15 @@ require 'httparty'
 class CatAPI
     include HTTParty
 
-    config = YAML.load_file("config/application.yml")
+    if File.exist? "config/application.yml"
+        config = YAML.load_file("config/application.yml")
+        API_KEY = config['api_key']
+        BASE_URL = config['base_url']
+    end
 
-    base_uri config['base_url']
+    base_uri BASE_URL
     format :xml
-    BASE_PARAMS = {api_key: config['api_key'], format: "xml", size: "med"}
+    BASE_PARAMS = {api_key: API_KEY, format: "xml", size: "med"}
 
     def self.get_categories
         categories = self.get("/categories/list", query: BASE_PARAMS)

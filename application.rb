@@ -3,7 +3,10 @@ require 'securerandom'
 require_relative 'cat_api'
 
 enable :sessions
-set :sessin_secret, YAML.load_file("config/application.yml")['secret']
+
+# load secret key from application.yml unless deploying to heroku
+SECRET = YAML.load_file("config/application.yml")['secret'] if File.exist? "config/application.yml"
+set :session_secret, SECRET
 
 CATEGORIES = CatAPI.get_categories
 
