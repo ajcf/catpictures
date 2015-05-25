@@ -24,7 +24,7 @@
                 <% @categories.each do |category| %>
                     <li class="category-options list-group-item">
                         <%= category %>
-                        <img class="category-spinner" src="/images/ajax-loader.gif" />
+                        <img class="loading-spinner" src="/images/ajax-loader.gif" />
                     </li>
                 <%end %>
             </ul>
@@ -33,12 +33,17 @@
         <div id="main" class="col-sm-9">
             <div class="row">
                 <div class="col-sm-8" id="actions">
-                    <button type="button" id="favorite-image" class="btn btn-default">favorite</button>
                     <button type="button" id="reload" class="btn btn-default">
                         See another!
-                         <img class="category-spinner" src="/images/ajax-loader.gif" />
-                         </button>
-                    <button type="button" id="report-image" class="btn btn-default">report</button> 
+                        <img class="loading-spinner" src="/images/ajax-loader.gif" />
+                    </button>
+                    <button type="button" id="favorite-image" class="btn btn-default">favorite</button>
+                    <button type="button" id="share-image" class="btn btn-default" data-toggle="popover"  data-placement="bottom" title="Sharing URL">share</button>
+                    <button type="button" id="report-image" class="btn btn-default">report</button>
+                    <button type="button" id="random-image" class="btn btn-default">
+                        random
+                        <img class="loading-spinner" src="/images/ajax-loader.gif" />
+                    </button>
                 </div>
             </div>
             <div id="error-message" class="alert-message alert alert-danger" role="alert"></div>

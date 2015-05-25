@@ -1,14 +1,20 @@
 $(function () {
 
-    ////// Event Listeners ////////
+    ////// initialization /////////
+    $('#share-image').popover({
+        content: function () { 
+            return $("#cat_photo").data('local-url'); 
+        }
+    });
 
+    ////// Event Listeners ////////
     $(".category-options").click(function (event) {
         var selectedCategory = event.target;
         var categoryName = selectedCategory.textContent.trim();
 
         $(".category-options").removeClass("active");
         $(selectedCategory).addClass("active");
-        $(selectedCategory).find(".category-spinner").show();
+        $(selectedCategory).find(".loading-spinner").show();
 
         updateCatPhoto(categoryName);
     });
@@ -19,11 +25,10 @@ $(function () {
 
     $("#reload").click(function (event) {
         var category = $(".category-options.active");
-        
         if (category.length > 0) {
             $(category).click();
         } else {
-            $(event.target).find(".category-spinner").show();
+            $(event.target).find(".loading-spinner").show();
             updateCatPhoto("random");
         }
     });
@@ -33,6 +38,12 @@ $(function () {
             reportCatPhoto();
             updateCatPhoto("random");
         }
+    });
+
+    $("#random-image").click(function (event) {
+        $(".category-options").removeClass("active");
+        $(event.target).find(".loading-spinner").show();
+        updateCatPhoto("random");
     });
 
     ////// Utility Methods ////////
@@ -45,7 +56,7 @@ $(function () {
         }).fail(function () {
             showMessage("No Image Found", "error");
         }).always(function () {
-            $(".category-spinner").hide();
+            $(".loading-spinner").hide();
         });
     }
 

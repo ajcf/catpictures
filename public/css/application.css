@@ -44,9 +44,10 @@ body {
     background-color: #488298;
 }
 
-.category-spinner {
+.loading-spinner {
     float: right; 
     display:none;
+    margin-left: 5px;
 }
 
 #actions button {
@@ -64,6 +65,7 @@ body {
 
 .footer {
   position: absolute;
+  text-align: center;
   bottom: 0;
   width: 100%;
   height: 30px;
@@ -71,5 +73,5 @@ body {
 }
 
 .footer-text {
-    margin: 20px 0;
+    margin: 20px 5px;
 }

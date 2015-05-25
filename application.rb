@@ -27,35 +27,52 @@ CATEGORIES = _build_category_list
 
 ######################## Routing ########################
 
+# default route - displays a random cat picture, or finds one by ID
 get '/' do
     session['unique_id'] = SecureRandom.hex(10) unless session['unique_id']
 
+    if params[:id]
+        @image = CatAPI.get_image(image_id: params[:id])
+    else
+        @image = CatAPI.get_image
+    end
+    @local_url = _get_local_url(@image, request)
     @categories = CATEGORIES
-    @image = CatAPI.get_random_image
     @unique_id = session['unique_id']
+
     erb :index
 end
 
+# fetches a cat picture for a given category name, or "random"
 get "/category/:category" do |category|
     if category == "favorites"
         @image = CatAPI.get_random_favorite(session[:unique_id])
     elsif CATEGORIES.include? category
-        @image = CatAPI.get_image_by_category(category)
+        @image = CatAPI.get_image(category: category)
     else
-        @image = CatAPI.get_random_image
+        @image = CatAPI.get_image
     end
+    @local_url = _get_local_url(@image, request)
     erb :cat_photo
 end
 
+# gets a random image from the current user's favorites
 get "/favorites" do 
     CatAPI.get_favorites(session[:unique_id])
 end
 
+# adds an image to the current user's favorites
 get "/favorite/:image_id" do |image_id|
     CatAPI.add_or_remove_favorite(session[:unique_id], image_id, true)
 end
 
+# reports an image to thecatapi.com
 get "/report/:image_id" do |image_id|
     CatAPI.report_image(image_id)
 end
 
+##### helpers #######
+
+def _get_local_url(image, request)
+    "#{request.base_url}?id=#{image['id']}"
+end
