@@ -19,7 +19,7 @@ Installing should be as easy as
 
 ```
 # download the application:
-git checkout https://github.com/ajcf/catpictures
+git checkout https://github.com/ajcf/catpictures.git
 cd catpictures
 
 # install dependances
