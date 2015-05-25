@@ -1,12 +1,5 @@
 $(function () {
 
-    ////// initialization /////////
-    $('#share-image').popover({
-        content: function () { 
-            return $("#cat_photo").data('local-url'); 
-        }
-    });
-
     ////// Event Listeners ////////
     $(".category-options").click(function (event) {
         var selectedCategory = event.target;
@@ -30,6 +23,23 @@ $(function () {
         } else {
             $(event.target).find(".loading-spinner").show();
             updateCatPhoto("random");
+        }
+    });
+
+    // trigger popover when "share" button is clicked
+    $('#share-image').popover({
+        content: function () { 
+            return $("#cat_photo").data('local-url'); 
+        }
+    });
+
+    // prevents share popover from lingering when user is no longer interested
+    // while allowing it to stick around long enough for users to copy/paste url
+    $("body").click(function (event) {
+        if ($(event.target).closest("#share-image").length == 0 && 
+            $(event.target).closest(".popover").length == 0)
+        {
+            $("#share-image").popover('hide');
         }
     });
 
