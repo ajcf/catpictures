@@ -40,7 +40,8 @@ class CatAPI
         params = BASE_PARAMS.merge(sub_id: session_id)
         response = self.get("/images/getfavourites", query: params)
         images = response['response']['data']['images']['image']
-        return images.length > 1 ? images.sample : images
+
+        return ((images.is_a? Array) ? images.sample : images)
     end
 
     # adds or removes an image from the user's favorite list

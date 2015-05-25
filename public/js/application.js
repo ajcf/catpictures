@@ -64,7 +64,13 @@ $(function () {
         $.get("/category/" + category, function (data) {
             $("#cat_photo_holder").html(data);
         }).fail(function () {
-            showMessage("No Image Found", "error");
+            var message = "No Image Found";
+            if (category.includes("favorite"))
+            {
+                message = "You have not favorited any images yet!" +
+                " Click the favorite button to save an image for later.";
+            }
+            showMessage(message, "error");
         }).always(function () {
             $(".loading-spinner").hide();
         });

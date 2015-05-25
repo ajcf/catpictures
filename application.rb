@@ -21,7 +21,7 @@ def _build_category_list
     category_list = raw_categories.map {|category| category['name']}.sort
     # the "kittens" category is empty, and never returns photos
     category_list.delete("kittens")
-    return category_list.unshift("favorites")
+    return category_list.unshift("your favorites")
 end
 CATEGORIES = _build_category_list
 
@@ -45,7 +45,7 @@ end
 
 # fetches a cat picture for a given category name, or "random"
 get "/category/:category" do |category|
-    if category == "favorites"
+    if category == "your favorites"
         @image = CatAPI.get_random_favorite(session[:unique_id])
     elsif CATEGORIES.include? category
         @image = CatAPI.get_image(category: category)
