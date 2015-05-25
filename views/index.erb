@@ -11,30 +11,30 @@
     <script src="/js/application.js" type="text/javascript"></script>
 </head>
 <body>
-    <div id="header" class="container-fluid">
+    <header class="header" id="header" class="container-fluid">
         <h1>
             KittyPics
         </h1>
         <p>your resource for photos of adorable cats</p>
-    </div>
-    <div class="container">
-    <div id="left-sidebar" class="col-sm-3">
+    </header>
+    <div class="container page-body">
+        <div id="left-sidebar" class="col-sm-3">
             <h4>Select a Category:</h4>
             <ul id="categories" class="list-group">
                 <% @categories.each do |category| %>
-                    <li class="category-options list-group-item">
-                        <%= category %>
-                        <img class="loading-spinner" src="/images/ajax-loader.gif" />
-                    </li>
+                <li class="category-options list-group-item">
+                    <%= category %>
+                    <img class="loading-spinner" src="/images/ajax-loader.gif" />
+                </li>
                 <%end %>
             </ul>
         </div>
 
         <div id="main" class="col-sm-9">
             <div class="row">
-                <div class="col-sm-8" id="actions">
+                <div class="col-sm-12" id="actions">
                     <button type="button" id="reload" class="btn btn-default">
-                        See another!
+                        see another!
                         <img class="loading-spinner" src="/images/ajax-loader.gif" />
                     </button>
                     <button type="button" id="favorite-image" class="btn btn-default">favorite</button>
@@ -57,9 +57,9 @@
     </div>
     <footer class="footer">
         <div class="container">
-                <span class="footer-text">Page created by Amanda Cadwell-Frost</span>
-                <span class="footer-text">[<a href="https://github.com/ajcf/catpictures">source</a>] </span>
-                <span class="footer-text">Images provided by <a href="http://thecatapi.com">thecatapi.com</a></span>
+            <span class="footer-text">Page created by Amanda Cadwell-Frost</span>
+            <span class="footer-text">[<a href="https://github.com/ajcf/catpictures">source</a>] </span>
+            <span class="footer-text">Images provided by <a href="http://thecatapi.com">thecatapi.com</a></span>
         </div>
     </footer>
 </body>
