@@ -1,34 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Cat App</title>
-    <link rel="stylesheet" href="/css/jquery-ui.min.css", type = "text/css" />
-    <link rel="stylesheet" href="/css/jquery-ui.structure.min.css", type = "text/css" />
-    <link rel="stylesheet" href="/css/jquery-ui.theme.min.css", type = "text/css" />
-    <link rel="stylesheet" href="/css/application.css", type = "text/css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="/css/application.css" type = "text/css" />
 
     <script src="/js/jquery-1.11.3.min.js" type="text/javascript"></script>
-    <script src="/js/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="/js/application.js" type="text/javascript"></script>
 </head>
 <body>
-    <div id="header">
+    <div id="header" class="container-fluid">
         <h1>
-            RateKitten
+            KittyPics
         </h1>
+        <p>your one-stop cat-photo shop</p>
     </div>
+    <div class="container">
+    <div id="left-sidebar" class="col-sm-3">
+            <h4>Select a Category:</h4>
+            <ul id="categories" class="list-group">
+                <% @categories.each do |category| %>
+                    <li class="category-options list-group-item">
+                        <%= category %>
+                        <img class="category-spinner" src="/images/ajax-loader.gif" />
+                    </li>
+                <%end %>
+            </ul>
+        </div>
 
-    <div id="left-sidebar">
-        <p>
-            <div class="ui-widget">
-                <label for="category_select">Start typing to choose a category: </label>
-                <input id="category_select" data-options='<%= @categories %>'>
+        <div id="main" class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-8" id="actions">
+                    <button type="button" id="favorite-image" class="btn btn-default">favorite</button>
+                    <button type="button" id="reload" class="btn btn-default">
+                        See another!
+                         <img class="category-spinner" src="/images/ajax-loader.gif" />
+                         </button>
+                    <button type="button" id="report-image" class="btn btn-default">report</button> 
+                </div>
             </div>
-        </p>
+            <div id="error-message" class="alert-message alert alert-danger" role="alert"></div>
+            <div id="success-message" class="alert-message alert alert-success" role="alert"></div>
+            <div id="photo-panel" class="panel panel-default">
+                <div id="cat_photo_holder" class="panel-body">
+                    <%= erb :cat_photo %>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div id="main">
-        <img id="cat_photo" src="<%= @image['url']%>"/>
-    </div>
+    <footer class="footer">
+        <div class="container">
+                <span class="footer-text">Page created by Amanda Cadwell-Frost</span>
+                <span class="footer-text">[<a href="https://github.com/ajcf/catpictures">source</a>] </span>
+                <span class="footer-text">Images provided by <a href="http://thecatapi.com">thecatapi.com</a></span>
+        </div>
+    </footer>
 </body>
 </html>
