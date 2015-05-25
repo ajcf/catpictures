@@ -5,7 +5,12 @@ require_relative 'cat_api'
 enable :sessions
 
 # load secret key from application.yml unless deploying to heroku
-SECRET = YAML.load_file("config/application.yml")['secret'] if File.exist? "config/application.yml"
+if ENV['SECRET']
+	SECRET = ENV['SECRET']
+else
+	SECRET = YAML.load_file("config/application.yml")['secret']
+end
+
 set :session_secret, SECRET
 
 CATEGORIES = CatAPI.get_categories

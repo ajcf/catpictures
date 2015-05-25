@@ -3,7 +3,10 @@ require 'httparty'
 class CatAPI
     include HTTParty
 
-    if File.exist? "config/application.yml"
+    if ENV['API_KEY'] and ENV['BASE_URL']
+        API_KEY = ENV['API_KEY']
+        BASE_URL = ENV['BASE_URL']
+    else
         config = YAML.load_file("config/application.yml")
         API_KEY = config['api_key']
         BASE_URL = config['base_url']
