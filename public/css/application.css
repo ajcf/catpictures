@@ -1,0 +1,23 @@
+html, body {
+	height: 100%;
+}
+#header {
+	background-color: #684083;
+	padding: 10px 50px;
+	color: white;
+}
+
+#left-sidebar
+{
+	background-color: #488298;
+	width: 25%;
+	float: left;
+	height: 100%;
+}
+
+#main {
+	background-color: #B4D0DB;
+	width: 75%;
+	float: left;
+	height: 100%;
+}

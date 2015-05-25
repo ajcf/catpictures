@@ -1,0 +1,3 @@
+base_url: http://thecatapi.com/api
+api_key:  YOUR_API_KEY
+secret:   SUPER_SECRET_STRING
